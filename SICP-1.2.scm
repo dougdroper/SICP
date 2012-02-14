@@ -42,23 +42,14 @@ h(n) = 2 ^ ( 2 ^ ( 2 ^ ...) (n times))
 (define (f n)
   (if (< n 3)
       n
-      (+ (f (- n 1)) 
-         (* 2 (f (- n 2))) 
+      (+ (f (- n 1))
+         (* 2 (f (- n 2)))
          (* 3 (f (- n 3))))))
 
-; looking at this backwards in terms of n
-; f(n)
-; f(n - 1)
-; f(n - 2)
-; On first iteration we need to move 
-; x = f(n - 2) -> 
-; y = f(n - 1) -> 
-; z = f(n) where
-; f(n) = (+ z (* 2 y) (* 3 x)
+
 ; x <- y
 ; y <- z
 ; z <- (+ z (* 2 y) (* 3 x))
-
 (define (f n)
   (define (f-iter x y z count)
     (if (= count 0)
