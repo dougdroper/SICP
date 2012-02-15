@@ -60,7 +60,7 @@ h(n) = 2 ^ ( 2 ^ ( 2 ^ ...) (n times))
 (f 4)
 
 ;Exercise 1.12
-(n k) = (- n 1) (- k 1) + (-n 1) k)
+;(n k) = (- n 1) (- k 1) + (-n 1) k)
 
 (define (pascal x y)
   (cond ((> y x) 0)
@@ -69,3 +69,16 @@ h(n) = 2 ^ ( 2 ^ ( 2 ^ ...) (n times))
         (else
          (+ (pascal (- x 1) (- y 1))
             (pascal (- x 1) y)))))
+
+; Prints it out...
+(define (line x y)
+  (print (pascal x y))
+  (if (= y x) "\n"
+        (line x (+ y 1))))
+
+(define (rows x start)
+  (print (line start 1))
+  (if (= start x) "\n"
+      (rows x (+ start 1))))
+
+(rows 5 1)
