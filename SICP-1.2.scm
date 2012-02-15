@@ -58,3 +58,13 @@ h(n) = 2 ^ ( 2 ^ ( 2 ^ ...) (n times))
   (f-iter 0 1 2 n))
 
 (f 4)
+
+;Exercise 1.12
+(n k) = (- n 1) (- k 1) + (-n 1) k)
+
+(define (pascal x y)
+  (cond ((= x 1) x)
+        ((= y 0) x)
+        (else
+         (+ (pascal (- x 1) (- y 1))
+            (pascal (- x 1) y)))))
