@@ -63,8 +63,9 @@ h(n) = 2 ^ ( 2 ^ ( 2 ^ ...) (n times))
 (n k) = (- n 1) (- k 1) + (-n 1) k)
 
 (define (pascal x y)
-  (cond ((= x 1) x)
-        ((= y 0) x)
+  (cond ((> y x) 0)
+        ((< y 0) 0)
+        ((= y 1) 1)
         (else
          (+ (pascal (- x 1) (- y 1))
             (pascal (- x 1) y)))))
