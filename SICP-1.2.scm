@@ -82,3 +82,12 @@ h(n) = 2 ^ ( 2 ^ ( 2 ^ ...) (n times))
       (rows x (+ start 1))))
 
 (rows 5 1)
+
+;Exercise 1.13
+(define sig (/ (+ 1 (sqrt 5)) 2))
+(define oma (/ (- 1 (sqrt 5)) 2))
+
+(define (new-fib x)
+  (/ (- (expt sig x) (expt oma x)) (sqrt 5)))
+
+(new-fib 10) -> 55
