@@ -168,21 +168,21 @@ h(n) = 2 ^ ( 2 ^ ( 2 ^ ...) (n times))
   (+ i i))
 
 (define (halve i)
-  (if ((even? i) (/ i 2))
-    i))
+  (/ i 2))
 
 (define (fast-multi a b)
   (cond ((= b 0) 0)
         ((even? b) (fast-multi (double a) (halve b)))
         (else
-        (+ (fast-multi a (- b 1))))))
+        (+ a (fast-multi a (- b 1))))))
 
 ; Exercise 1.18
-(define iml a b c)
-  (cond ((= b 0) a)
-        ((even? c) iml a (double b) (halve c))
-        (else
-          (iml (+ a b) a (- c 1)))))
+;DAMN IT!!!!!!! Not right
+; (define (iml a b c)
+;   (cond ((= b 0) a)
+;         ((even? c) (iml a (double b) (halve c)))
+;         (else
+;           (iml (+ a b) b (- c 1)))))
 
 ; (iml 0 2 3)
 ; (iml 2 2 2)
