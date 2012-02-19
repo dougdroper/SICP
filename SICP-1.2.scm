@@ -146,6 +146,50 @@ h(n) = 2 ^ ( 2 ^ ( 2 ^ ...) (n times))
                                                      |              |
                                                      0              1
 
+; Exercise 1.16
+;(fast-expt 1 2 2)
+;(fast-expt 1 4 1)
+;(fast-expt 4 4 0)
+;4
+
+;(fast-expt 1 2 3)
+;(fast-expt 2 2 2)
+;(fast-expt 2 4 1)
+;(fast-expt 8 4 0)
+;8
+(define (fast-expt a b n)
+  (cond ((= a 0) a)
+        ((even? n) (fast-expt a (square b) (/ n 2)))
+        (else (fast-expt (* a b) b (- n 1)))))
+      
+; Exercise 1.17
+;(define (* a b)
+;  (if (= b 0)
+;      0
+;      (+ a (* a (- b 1)))))
+(*  2 2)
+(+ 2 (* 2 1))
+(+ 2 (+ 2 (* 2 0)))
+(+ 2 (+ 2))
+4
+
+(fast-multi 1 2 2)
+(fast-multi 2 2 1)
+
+;(fast-multi )
+(define (double i)
+  (* i i))
+
+(define (halve i)
+  (if ((even? i) (/ i 2))
+    i))
+
+(define (fast-multi a b)
+  (cond ((= b 0) 0)
+        ((even? b) (fast-multi (double a) (halve b)))
+        (else
+        (+ (fast-multi a (- b 1))))))
+
 
 
 
