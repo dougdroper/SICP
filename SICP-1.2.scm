@@ -147,38 +147,25 @@ h(n) = 2 ^ ( 2 ^ ( 2 ^ ...) (n times))
                                                      0              1
 
 ; Exercise 1.16
-;(fast-expt 1 2 2)
-;(fast-expt 1 4 1)
-;(fast-expt 4 4 0)
-;4
+(define (fast-expt a b n)
+  (cond ((= a 0) a)
+        ((even? n) (fast-expt a (square b) (/ n 2)))
+        (else (fast-expt (* a b) b (- n 1)))))
 
 ;(fast-expt 1 2 3)
 ;(fast-expt 2 2 2)
 ;(fast-expt 2 4 1)
 ;(fast-expt 8 4 0)
 ;8
-(define (fast-expt a b n)
-  (cond ((= a 0) a)
-        ((even? n) (fast-expt a (square b) (/ n 2)))
-        (else (fast-expt (* a b) b (- n 1)))))
       
 ; Exercise 1.17
 ;(define (* a b)
 ;  (if (= b 0)
 ;      0
 ;      (+ a (* a (- b 1)))))
-(*  2 2)
-(+ 2 (* 2 1))
-(+ 2 (+ 2 (* 2 0)))
-(+ 2 (+ 2))
-4
 
-(fast-multi 1 2 2)
-(fast-multi 2 2 1)
-
-;(fast-multi )
 (define (double i)
-  (* i i))
+  (+ i i))
 
 (define (halve i)
   (if ((even? i) (/ i 2))
@@ -189,6 +176,19 @@ h(n) = 2 ^ ( 2 ^ ( 2 ^ ...) (n times))
         ((even? b) (fast-multi (double a) (halve b)))
         (else
         (+ (fast-multi a (- b 1))))))
+
+; Exercise 1.18
+(define iml a b c)
+  (cond ((= b 0) a)
+        ((even? c) iml a (double b) (halve c))
+        (else
+          (iml (+ a b) a (- c 1)))))
+
+; (iml 0 2 3)
+; (iml 2 2 2)
+; (iml 2 4 1)
+; (iml 6 4 0)
+; 6
 
 
 
