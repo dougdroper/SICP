@@ -47,6 +47,7 @@ h(n) = 2 ^ ( 2 ^ ( 2 ^ ...) (n times))
          (* 3 (f (- n 3))))))
 
 
+;f(n) = f(n) + 2f(n - 1) + 3f(n - 2)
 ; x <- y
 ; y <- z
 ; z <- (+ z (* 2 y) (* 3 x))
@@ -57,11 +58,13 @@ h(n) = 2 ^ ( 2 ^ ( 2 ^ ...) (n times))
       (f-iter y z (+ z (* 2 y) (* 3 x)) (- count 1))))
   (f-iter 0 1 2 n))
 
-(f 4)
-
 ;Exercise 1.12
 ;(n k) = (- n 1) (- k 1) + (-n 1) k)
-
+;|1|0|0|0|0
+;|1|1|0|0|0
+;|1|2|1|0|0
+;|1|3|3|1|0
+;|1|4|6|4|1
 (define (pascal x y)
   (cond ((> y x) 0)
         ((< y 0) 0)
@@ -81,9 +84,8 @@ h(n) = 2 ^ ( 2 ^ ( 2 ^ ...) (n times))
   (if (= start x) "\n"
       (rows x (+ start 1))))
 
-(rows 5 1)
 
-;Exercise 1.13
+;Exercise 1.13, not really proof
 (define phi (/ (+ 1 (sqrt 5)) 2))
 (define psi (/ (- 1 (sqrt 5)) 2))
 
