@@ -111,7 +111,7 @@ h(n) = 2 ^ ( 2 ^ ( 2 ^ ...) (n times))
         ((= kinds-of-coins 3) 10)
         ((= kinds-of-coins 4) 25)
         ((= kinds-of-coins 5) 50)))
-                
+
                                                  cc 11 5
                                                    |
                                     cc 11 4 +  --------- cc (11 - 50) 5
@@ -138,9 +138,9 @@ h(n) = 2 ^ ( 2 ^ ( 2 ^ ...) (n times))
                                             |                       |
                                              etc                ---- ----
                                                               |         |
-                                                         cc 1 1         cc 1 5      
+                                                         cc 1 1         cc 1 5
                                                            |               |
-                                                       ---- ----    
+                                                       ---- ----            etc
                                                       |         |
                                                   cc 1 0      cc (1 - 1) 0
                                                      |              |
@@ -148,7 +148,7 @@ h(n) = 2 ^ ( 2 ^ ( 2 ^ ...) (n times))
 
 ; Exercise 1.16
 (define (fast-expt a b n)
-  (cond ((= a 0) a)
+  (cond ((= n 0) a)
         ((even? n) (fast-expt a (square b) (/ n 2)))
         (else (fast-expt (* a b) b (- n 1)))))
 
@@ -157,7 +157,7 @@ h(n) = 2 ^ ( 2 ^ ( 2 ^ ...) (n times))
 ;(fast-expt 2 4 1)
 ;(fast-expt 8 4 0)
 ;8
-      
+
 ; Exercise 1.17
 ;(define (* a b)
 ;  (if (= b 0)
@@ -177,12 +177,11 @@ h(n) = 2 ^ ( 2 ^ ( 2 ^ ...) (n times))
         (+ a (fast-multi a (- b 1))))))
 
 ; Exercise 1.18
-;DAMN IT!!!!!!! Not right
-; (define (iml a b c)
-;   (cond ((= b 0) a)
-;         ((even? c) (iml a (double b) (halve c)))
-;         (else
-;           (iml (+ a b) b (- c 1)))))
+(define (iml a b c)
+   (cond ((= c 0) a)
+         ((even? c) (iml a (double b) (halve c)))
+         (else
+           (iml (+ a b) b (- c 1)))))
 
 ; (iml 0 2 3)
 ; (iml 2 2 2)
@@ -190,6 +189,26 @@ h(n) = 2 ^ ( 2 ^ ( 2 ^ ...) (n times))
 ; (iml 6 4 0)
 ; 6
 
+; Exercise 1.19
+; b = (bp + aq)
+; b' = p(bp + aq) + q(bq + aq + ap)
+; b' = bpp + apq + bqq + aqq + apq
+; b' = bpp + 2apq + bqq + aqq
+; b' = b(pp + qq) + a(2pq + qq)
 
-
+(define (fib n)
+  (fib-iter 1 0 0 1 n))
+(define (fib-iter a b p q count)
+  (cond ((= count 0) b)
+        ((even? count)
+         (fib-iter a
+                   b
+                   (+ (square p) (square q))
+                   (+ (* 2 p q) (square q))
+                   (/ count 2)))
+        (else (fib-iter (+ (* b q) (* a q) (* a p))
+                        (+ (* b p) (* a q))
+                        p
+                        q
+                        (- count 1)))))
 
